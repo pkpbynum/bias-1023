@@ -52,6 +52,7 @@ const Survey = () => {
             <Typography variant="h4" style={{ textAlign: 'center', marginBottom: 20 }}>
               {`Your Score: ${score}/100`}
             </Typography>
+            <Typography variant="body1" style={{ textAlign: 'center' }}>Incredibly biased and prejudiced, closed-minded.</Typography>
             <Typography variant="body2" style={{ textAlign: 'center' }}>
               Thanks for taking the survey! We hope you liked it.
               The personality questions came from
