@@ -3,8 +3,11 @@ import styled from 'styled-components'
 import {
   BrowserRouter as Router, Switch, Route,
 } from 'react-router-dom'
-import { CssBaseline } from '@material-ui/core'
+import { CssBaseline, ThemeProvider } from '@material-ui/core'
 import Survey from './Survey'
+import NavBar from './NavBar'
+import theme from './theme'
+import { useSurvey } from './SurveyContext'
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -13,19 +16,34 @@ const Wrapper = styled.div`
   flex-direction: column;
 `
 
-function App() {
+const getTheme = bias => {
+  switch (bias) {
+    case 'UNBIASED':
+      return theme.unbiased
+    case 'LEFT':
+      return theme.left
+    default:
+      return theme.right
+  }
+}
+
+const App = () => {
+  const { bias } = useSurvey()
+
   return (
     <Router>
-      <CssBaseline />
-      <Switch>
-        <Wrapper>
-          <Route path="/">
-            <Survey />
-          </Route>
-        </Wrapper>
-      </Switch>
+      <ThemeProvider theme={getTheme(bias)}>
+        <CssBaseline />
+        <Switch>
+          <Wrapper>
+            <NavBar />
+            <Route path="/">
+              <Survey />
+            </Route>
+          </Wrapper>
+        </Switch>
+      </ThemeProvider>
     </Router>
   )
 }
-
 export default App
